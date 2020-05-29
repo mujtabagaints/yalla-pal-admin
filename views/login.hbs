@@ -1,0 +1,44 @@
+    {{> header }}
+
+    <!-- begin::Body -->
+    <body class="kt-page--loading-enabled kt-page--loading kt-page--fixed kt-header--fixed kt-header--minimize-topbar kt-header-mobile--fixed kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-subheader--enabled kt-subheader--transparent kt-page--loading">
+    	<div class="kt-grid kt-grid--ver kt-grid--root kt-page">
+	        <div class="kt-grid kt-grid--hor kt-grid--root kt-login kt-login--v2 kt-login--signin" id="kt_login">
+	            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="background-image: url(theme/media/bg-1.jpg);">
+	                <div class="kt-grid__item kt-grid__item--fluid kt-login__wrapper" style="background: none;">
+	                    <div class="kt-login__container">
+	                        <div class="kt-login__logo">
+	                            <a href="#">
+	                                <img src="theme/media/logos/logo.png">
+	                            </a>
+	                        </div>
+	                        <div class="kt-login__signin">
+	                            <div class="kt-login__head">
+	                                <h3 class="kt-login__title">Sign In</h3>
+	                            </div>
+	                            <form class="kt-form" method="POST" action="/login">
+	                            	{{#if error}}
+	                            		<div class="alert alert-danger alert-dismissible" role="alert">         
+                                            <div class="alert-text">{{ error }}</div>         
+                                            <div class="alert-close">                
+                                                <i class="flaticon2-cross kt-icon-sm" data-dismiss="alert"></i>            
+                                            </div>      
+                                        </div>
+                                    {{/if}}
+	                                <div class="input-group">
+	                                    <input class="form-control" type="email" placeholder="Email" id="email" name="email" autocomplete="off" aria-describedby="email-error">
+	                                </div>
+	                                <div class="input-group">
+	                                    <input class="form-control" type="password" placeholder="Password" id="password" name="password">
+	                                </div>
+	                                <div class="kt-login__actions">
+	                                    <button id="kt_login_signin_submit" class="btn btn-pill kt-login__btn-primary">Sign In</button>
+	                                </div>
+	                            </form>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+{{> footer }}

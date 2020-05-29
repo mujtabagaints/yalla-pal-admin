@@ -1,0 +1,130 @@
+<div class="kt-header__bottom">
+    <div class="kt-container">
+
+        <!-- begin: Header Menu -->
+        <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+        <div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
+            <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile ">
+                <ul class="kt-menu__nav ">
+                    <li class="kt-menu__item kt-menu__item @if(Request :: is('dashboard')) kt-menu__item--here @endif" aria-haspopup="true"><a href="dashboard" class="kt-menu__link"><span class="kt-menu__link-text">Dashboard</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                        <!-- <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                            <ul class="kt-menu__subnav">
+                                <li class="kt-menu__item  @if(Request :: is('dashboard')) kt-menu__item--active @endif " aria-haspopup="true"><a href="dashboard" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Default Dashboard</span></a></li>
+                                <li class="kt-menu__item " aria-haspopup="true"><a href="demo5/dashboards/fluid.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Fluid Dashboard</span></a></li>
+                                <li class="kt-menu__item " aria-haspopup="true"><a href="demo5/dashboards/aside.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Aside Dashboard</span></a></li>
+                            </ul>
+                        </div> -->
+                    </li>
+                    <li class="kt-menu__item @if(Request :: is('allInstituteType','addInstituteType','editInstituteType/*','allInstituteCategory','addInstituteCategory','editInstituteCategory/*','allInstitute','addInstitute','editInstitute/*','allTrainer','addTrainer','editTrainer/*','addInstituteSector','allInstituteSector','editInstituteSector/*','allItem','addItem','editItem/*','allTraining','addTraining','editTraining/*','allProperty','addProperty','editProperty/*','allProjects','addProject','editProject/*')) kt-menu__item--here @endif kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Setups</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                        <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                            <ul class="kt-menu__subnav">
+                                <li class="kt-menu__item  kt-menu__item--submenu @if(Request :: is('allProperty','addProperty','editProperty/*')) kt-menu__item--active @endif" data-ktmenu-submenu-toggle="hover" aria-haspopup="true"><a href="#" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Property</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item @if(Request :: is('addInstituteType')) kt-menu__item--active @endif" aria-haspopup="true">
+                                                <a href="/addProperty" class="kt-menu__link ">
+                                                    <span class="kt-menu__link-text"><i class="fa fa-plus-circle"></i>Add Property</span>
+                                                </a>
+                                            </li>
+                                            <li class="kt-menu__item @if(Request :: is('allInstituteType')) kt-menu__item--active @endif" aria-haspopup="true">
+                                                <a href="/allProperty" class="kt-menu__link">
+                                                    <span class="kt-menu__link-text"><i class="fa fa-list"></i>List Property</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="kt-menu__item  kt-menu__item--submenu @if(Request :: is('allJob','addJob','editJob/*')) kt-menu__item--active @endif" data-ktmenu-submenu-toggle="hover" aria-haspopup="true"><a href="#" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Job</span><i class="kt-menu__hor-arrow la la-angle-right"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--right">
+                                        <ul class="kt-menu__subnav">
+                                            <li class="kt-menu__item @if(Request :: is('addInstituteType')) kt-menu__item--active @endif" aria-haspopup="true">
+                                                <a href="/addJob" class="kt-menu__link ">
+                                                    <span class="kt-menu__link-text"><i class="fa fa-plus-circle"></i>Add Job</span>
+                                                </a>
+                                            </li>
+                                            <li class="kt-menu__item @if(Request :: is('allInstituteType')) kt-menu__item--active @endif" aria-haspopup="true">
+                                                <a href="/allJob" class="kt-menu__link">
+                                                    <span class="kt-menu__link-text"><i class="fa fa-list"></i>List Job</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    {{!-- <li class="kt-menu__item @if(Request :: is('allTrainee','addTrainee','editTrainee/*')) kt-menu__item--here @endif kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Trainee</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                        <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                            <ul class="kt-menu__subnav">
+                                <li class="kt-menu__item @if(Request :: is('addTrainee')) kt-menu__item--active @endif" aria-haspopup="true">
+                                    <a href="/addTrainee" class="kt-menu__link ">
+                                        <span class="kt-menu__link-text"><i class="fa fa-plus-circle"></i>Add Trainee</span>
+                                    </a>
+                                </li>
+                                <li class="kt-menu__item @if(Request :: is('allTrainee')) kt-menu__item--active @endif" aria-haspopup="true">
+                                    <a href="/allTrainee" class="kt-menu__link ">
+                                        <span class="kt-menu__link-text"><i class="fa fa-list"></i>All Trainee</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="kt-menu__item @if(Request :: is('allTrainingHead','addTrainingHead','editTrainingHead/*')) kt-menu__item--here @endif kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Training Head</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                        <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                            <ul class="kt-menu__subnav">
+                                <li class="kt-menu__item @if(Request :: is('addInvoice')) kt-menu__item--active @endif" aria-haspopup="true">
+                                    <a href="/addTrainingHead" class="kt-menu__link ">
+                                        <span class="kt-menu__link-text"><i class="fa fa-plus-circle"></i>Add Training Head</span>
+                                    </a>
+                                </li>
+                                <li class="kt-menu__item @if(Request :: is('allTrainingHead')) kt-menu__item--active @endif" aria-haspopup="true">
+                                    <a href="/allTrainingHead" class="kt-menu__link ">
+                                        <span class="kt-menu__link-text"><i class="fa fa-list"></i>All Training Head</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="kt-menu__item @if(Request :: is('allInvoice','addInvoice/*','editInvoice/*','viewInvoice/*')) kt-menu__item--here @endif kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Invoice</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                        <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                            <ul class="kt-menu__subnav">
+                                <!-- <li class="kt-menu__item @if(Request :: is('addInvoice')) kt-menu__item--active @endif" aria-haspopup="true">
+                                    <a href="/addInvoice" class="kt-menu__link ">
+                                        <span class="kt-menu__link-text"><i class="fa fa-plus-circle"></i>Add Invoice</span>
+                                    </a>
+                                </li> -->
+                                <li class="kt-menu__item @if(Request :: is('allInvoice')) kt-menu__item--active @endif" aria-haspopup="true">
+                                    <a href="/allInvoice" class="kt-menu__link ">
+                                        <span class="kt-menu__link-text"><i class="fa fa-list"></i>All Invoices</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li> --}}
+                </ul>
+            </div>
+            <div class="kt-header-toolbar">
+                <div class="kt-quick-search" id="kt_quick_search_default">
+                    <form method="get" class="kt-quick-search__form">
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="flaticon2-search-1"></i></span></div>
+                            <input type="text" class="form-control kt-quick-search__input" placeholder="Search...">
+                            <div class="input-group-append"><span class="input-group-text"><i class="la la-close kt-quick-search__close"></i></span></div>
+                        </div>
+                    </form>
+                    <div id="kt_quick_search_toggle" data-toggle="dropdown" data-offset="0px,10px"></div>
+                    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-lg">
+                        <div class="kt-quick-search__wrapper kt-scroll" data-scroll="true" data-height="300" data-mobile-height="200">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- end: Header Menu -->
+    </div>
+</div>
+</div>
+
+<!-- end:: Header -->

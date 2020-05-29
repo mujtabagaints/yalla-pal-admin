@@ -1,0 +1,92 @@
+{{> masterHeader }}
+{{> menu }}
+	<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+		<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+								
+			<!-- begin:: Subheader -->
+			<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+			    <!-- <div class="kt-container ">
+			        <div class="kt-subheader__main">
+			            <h3 class="kt-subheader__title">
+			                {{ $module }}                           
+			            </h3>
+						<span class="kt-subheader__separator kt-hidden"></span>
+			            <div class="kt-subheader__breadcrumbs">
+			                <a href="#" class="kt-subheader__breadcrumbs-home">
+			                	<i class="flaticon2-shelter"></i>
+			                </a>
+			                   <span class="kt-subheader__breadcrumbs-separator"></span>
+			                <a href="" class="kt-subheader__breadcrumbs-link">
+			                    {{ $menu }}                        
+			                </a>
+			                <span class="kt-subheader__breadcrumbs-separator"></span>
+			                <a href="" class="kt-subheader__breadcrumbs-link">
+			                	{{ $module }}                       
+			                </a>
+			                <span class="kt-subheader__breadcrumbs-separator"></span>
+			                <a href="" class="kt-subheader__breadcrumbs-link">
+			                    {{ $page }}                     
+			                </a>
+			            </div>
+			        </div>
+			    </div> -->
+			</div>
+			<!-- end:: Subheader -->
+
+			<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+				<div class="row">
+					<div class="col-md-8 auto-margin">
+						<div class="kt-portlet">
+							<div class="kt-portlet__head">
+								<div class="kt-portlet__head-label">
+									<h3 class="kt-portlet__head-title">
+										Jobs Details
+									</h3>
+								</div>
+							</div>
+							<!--begin::Form-->
+							<form class="kt-form kt-form--label-right" action="/saveProperty" method="POST">
+
+								<div class="kt-portlet__body">
+									<div class="form-group row">
+
+										<div class="col-md-4">
+											<label for="example-text-input" class="col-form-label">Company Name</label>
+											<input class="form-control" type="text" value="" name="name" id="example-text-input" required="">
+										</div>
+										<div class="col-md-4">
+											<label for="example-text-input" class="col-form-label">Country</label>
+											<input class="form-control" type="number" value="" name="name" id="example-text-input" required="" min="0">
+										</div>
+										<div class="col-md-4">
+											<label for="example-text-input" class="col-form-label">City</label>
+											<input class="form-control" type="number" value="" name="name" id="example-text-input" required="" min="0">
+										</div>
+										<div class="col-md-12">
+											<label for="example-text-input" class="col-form-label">Description</label>
+											<input class="form-control" type="text" value="" name="name" id="example-text-input" required="" min="0">
+										</div>
+										
+										
+
+									</div>
+
+								</div>
+								<div class="kt-portlet__foot">
+									<div class="kt-form__actions">
+										<div class="row">
+											<div class="col-8">
+											</div>
+											<div class="col-lg-4 kt-align-right">
+												<button type="submit" class="btn btn-success">Submit</button>
+												<button type="reset" class="btn btn-secondary">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+{{> footer }}
