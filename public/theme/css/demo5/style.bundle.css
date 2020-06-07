@@ -34620,3 +34620,6 @@ span i{
 #department_div{
   display: none;
 }
+.img-div{
+  width: 100%;height: 170px;border: 1px solid #000;margin-bottom: 20px;
+}

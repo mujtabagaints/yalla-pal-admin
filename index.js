@@ -3,7 +3,15 @@ const app = express();
 const path = require("path");
 const hbs = require('hbs');
 const exphs = require("express-handlebars");
+const fileupload = require("express-fileupload");
 var fs = require('fs');
+const flash = require('connect-flash');
+const session = require('express-session');
+app.use(session({ cookie: { maxAge: 60000 }, 
+                  secret: 'woot',
+                  resave: false, 
+                  saveUninitialized: false}));
+app.use(flash());
 
 //require file for database
 const db = require("./config/db.js");
@@ -14,15 +22,14 @@ db.connect( (error) => {
 		console.log("Database Connection Established");
 	}
 });
-
 //setting directory for CSS & JS Files for views
-const publicDirectory = path.join(__dirname,'./public');
+const publicDirectory = path.join(__dirname,'/public');
 app.use(express.static(publicDirectory));
 
 //parsing url encoded bodies
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-//app.use(cookieParser());
+app.use(fileupload());
 
 //setting view engine for html pages
 // app.engine("handlebars",exphs({

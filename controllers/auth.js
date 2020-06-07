@@ -33,10 +33,13 @@ exports.login = async(req,res) => {
 					httpOnly: true
 				}
 				res.cookie('login jwt', token, cookiesOptions);
-				//res.render('dashboard');
-				res.render('dashboard',{
-					successMsg: "SUCCESS!"
-				});
+				req.session.loggedin = true;
+				req.session.username = results[0].name;
+				res.redirect('/dashboard');
+				// //res.render('dashboard');
+				// res.render('dashboard',{
+				// 	successMsg: "SUCCESS!"
+				// });
 			}
 		})
 	}catch(error){

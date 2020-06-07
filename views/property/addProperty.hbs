@@ -2,36 +2,6 @@
 {{> menu }}
 	<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
 		<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
-								
-			<!-- begin:: Subheader -->
-			<div class="kt-subheader   kt-grid__item" id="kt_subheader">
-			    <!-- <div class="kt-container ">
-			        <div class="kt-subheader__main">
-			            <h3 class="kt-subheader__title">
-			                {{ $module }}                           
-			            </h3>
-						<span class="kt-subheader__separator kt-hidden"></span>
-			            <div class="kt-subheader__breadcrumbs">
-			                <a href="#" class="kt-subheader__breadcrumbs-home">
-			                	<i class="flaticon2-shelter"></i>
-			                </a>
-			                   <span class="kt-subheader__breadcrumbs-separator"></span>
-			                <a href="" class="kt-subheader__breadcrumbs-link">
-			                    {{ $menu }}                        
-			                </a>
-			                <span class="kt-subheader__breadcrumbs-separator"></span>
-			                <a href="" class="kt-subheader__breadcrumbs-link">
-			                	{{ $module }}                       
-			                </a>
-			                <span class="kt-subheader__breadcrumbs-separator"></span>
-			                <a href="" class="kt-subheader__breadcrumbs-link">
-			                    {{ $page }}                     
-			                </a>
-			            </div>
-			        </div>
-			    </div> -->
-			</div>
-			<!-- end:: Subheader -->
 
 			<div class="kt-container  kt-grid__item kt-grid__item--fluid">
 				<div class="row">
@@ -45,38 +15,45 @@
 								</div>
 							</div>
 							<!--begin::Form-->
-							<form class="kt-form kt-form--label-right" action="/saveProperty" method="POST">
+							<form class="kt-form kt-form--label-right" action="/saveProperty" method="POST" enctype="multipart/form-data">
 
 								<div class="kt-portlet__body">
 									<div class="form-group row">
-
-										<div class="col-md-3">
-											<label for="example-text-input" class="col-form-label">Name</label>
-											<input class="form-control" type="text" value="" name="name" id="example-text-input" required="">
+										<div class="col-lg-3">
+											<img src="theme/media/logos/logo.png" id="showImg" class="img-div">
+											<input type="file" name="img" id="img" required="" class="getPicture">
 										</div>
-										<div class="col-md-3">
-											<label for="example-text-input" class="col-form-label">Price</label>
-											<input class="form-control" type="number" value="" name="name" id="example-text-input" required="" min="0">
-										</div>
-										<div class="col-md-3">
-											<label for="example-text-input" class="col-form-label">Area</label>
-											<input class="form-control" type="number" value="" name="name" id="example-text-input" required="" min="0">
-										</div>
-										<div class="col-md-3">
-											<label for="example-text-input" class="col-form-label">Beds</label>
-											<input class="form-control" type="number" value="" name="name" id="example-text-input" required="" min="0">
-										</div>
-										<div class="col-md-3">
-											<label for="example-text-input" class="col-form-label">Baths</label>
-											<input class="form-control" type="number" value="" name="name" id="example-text-input" required="" min="0">
-										</div>
-										<div class="col-md-9">
-											<label for="example-text-input" class="col-form-label">Description</label>
-											<input class="form-control" type="text" value="" name="name" id="example-text-input" required="" min="0">
+										<div class="col-lg-9">
+											<div class="col-lg-12">
+												<div class="row">
+													<div class="col-lg-3">
+														<label for="example-text-input" class="col-form-label">Name</label>
+														<input class="form-control" type="text" value="" name="name" id="name" required="">
+													</div>
+													<div class="col-lg-3">
+														<label for="example-text-input" class="col-form-label">Price</label>
+														<input class="form-control" type="number" value="" name="price" id="price" required="" min="0">
+													</div>
+													<div class="col-lg-3">
+														<label for="example-text-input" class="col-form-label">Area</label>
+														<input class="form-control" type="number" value="" name="area" id="area" required="" min="0">
+													</div>
+													<div class="col-lg-3">
+														<label for="example-text-input" class="col-form-label">Beds</label>
+														<input class="form-control" type="number" value="" name="beds" id="beds" required="" min="0">
+													</div>
+													<div class="col-lg-3">
+														<label for="example-text-input" class="col-form-label">Baths</label>
+														<input class="form-control" type="number" value="" name="bath" id="bath" required="" min="0">
+													</div>
+													<div class="col-lg-9">
+														<label for="example-text-input" class="col-form-label">Description</label>
+														<textarea class="form-control" rows="5" id="description" name="description"></textarea>
+													</div>
+												</div>
+											</div>
 										</div>
 										
-										
-
 									</div>
 
 								</div>
