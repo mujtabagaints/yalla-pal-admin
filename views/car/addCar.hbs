@@ -1,0 +1,80 @@
+{{> masterHeader }}
+{{> menu }}
+	<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+		<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+			<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+				<div class="row">
+					<div class="col-md-8 auto-margin">
+						<div class="kt-portlet">
+							<div class="kt-portlet__head">
+								<div class="kt-portlet__head-label">
+									<h3 class="kt-portlet__head-title">
+										Cars Details
+									</h3>
+								</div>
+							</div>
+							<!--begin::Form-->
+							<form class="kt-form kt-form--label-right" action="/car/save" method="POST" enctype="multipart/form-data">
+
+								<div class="kt-portlet__body">
+									<div class="form-group row">
+
+										<div class="col-lg-3">
+											<img src="/theme/media/logos/logo.png" id="showImg" class="img-div">
+											<input type="file" name="img" id="img" required="" class="getPicture">
+										</div>
+										<div class="col-lg-9">
+											<div class="col-lg-12">
+												<div class="row">
+													<div class="col-lg-3">
+														<label for="example-text-input" class="col-form-label">Model</label>
+														<input class="form-control" type="text" value="" name="model" id="model" required="">
+													</div>
+													<div class="col-lg-3">
+														<label for="example-text-input" class="col-form-label">Seat Capacity</label>
+														<input class="form-control" type="number" value="" name="seat" id="seat" required="" min="0">
+													</div>
+													<div class="col-lg-3">
+														<label for="example-text-input" class="col-form-label">Engine Transmission</label>
+														<select class="form-control" name="engine" id="engine">
+															<option value="Manual">Manual</option>
+															<option value="Auto">Auto</option>
+														</select>
+													</div>
+													<div class="col-lg-3">
+														<label for="example-text-input" class="col-form-label">Pre-Owned</label>
+														<select class="form-control" name="pre_owned" id="pre_owned">
+															<option value="yes">Yes</option>
+															<option value="No">No</option>
+														</select>
+													</div>
+													<div class="col-md-12">
+														<label for="example-text-input" class="col-form-label">Description</label>
+														<textarea rows="5" name="description" id="description" class="form-control"></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+
+								</div>
+								<div class="kt-portlet__foot">
+									<div class="kt-form__actions">
+										<div class="row">
+											<div class="col-8">
+											</div>
+											<div class="col-lg-4 kt-align-right">
+												<button type="submit" class="btn btn-success">Submit</button>
+												<button type="reset" class="btn btn-secondary">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+{{> footer }}

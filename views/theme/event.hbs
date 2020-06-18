@@ -1,0 +1,109 @@
+{{> themeHeader }}
+	
+	<div id="header" style="background-image: url('/assets/img/events.png');">
+		<div class="main-content">	
+			<div class="page-heading">
+				<div class="page-heading-txt">
+					Yalla<span>Events</span>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<div class="main-content" id="main-content">
+		<div class="col-lg-12">
+			<div class="col-lg-3 clearfix">
+				<div class="main-filter wow bounceInDown">
+					<div class="main-filter-heading">
+						show months
+					</div>
+					<a href="/event?month=01#main-content"><div class="filter-txt">. january <span>(9)</span></div></a>
+					<a href="/event?month=02#main-content"><div class="filter-txt">. Feburary <span>(9)</span></div></a>
+					<a href="/event?month=03#main-content"><div class="filter-txt">. march <span>(9)</span></div></a>
+					<a href="/event?month=04#main-content"><div class="filter-txt">. April <span>(9)</span></div></a>
+					<a href="/event?month=05#main-content"><div class="filter-txt">. may <span>(9)</span></div></a>
+					<a href="/event?month=06#main-content"><div class="filter-txt">. june <span>(9)</span></div></a>
+					<a href="/event?month=07#main-content"><div class="filter-txt">. july <span>(9)</span></div></a>
+					<a href="/event?month=08#main-content"><div class="filter-txt">. august <span>(9)</span></div></a>
+					<a href="/event?month=09#main-content"><div class="filter-txt">. september <span>(9)</span></div></a>
+					<a href="/event?month=10#main-content"><div class="filter-txt">. october <span>(9)</span></div></a>
+					<a href="/event?month=11#main-content"><div class="filter-txt">. november <span>(9)</span></div></a>
+					<a href="/event?month=12#main-content"><div class="filter-txt">. december <span>(9)</span></div></a>
+				</div>
+				<div class="sub-filter wow bounceInDown">
+					<div class="sub-filter-heading">
+						tags
+					</div>
+					<a href="/event?tag=Arts#main-content"><div class="sub-filter-txt">. arts <span>(5)</span></div></a>
+					<a href="/event?tag=Community#main-content"><div class="sub-filter-txt">. community <span>(5)</span></div></a>
+					<a href="/event?tag=Family#main-content"><div class="sub-filter-txt">. family <span>(5)</span></div></a>
+					<a href="/event?tag=Lifestyle#main-content"><div class="sub-filter-txt">. lifestyle <span>(5)</span></div></a>
+					<a href="/event?tag=Experience#main-content"><div class="sub-filter-txt">. experience <span>(5)</span></div></a>
+					<a href="/event?tag=Telecom#main-content"><div class="sub-filter-txt">. entertainment <span>(5)</span></div></a>
+				</div>
+				<div class="filter-submit-btn  wow bounceInRight">
+					Apply
+				</div>
+			</div>
+			<div class="col-lg-9">
+
+				<div class="col-lg-12 clearfix">
+					<div class="secondary-filter clearfix">
+						<div class="col-lg-3">
+							<select class="sort-by" id="sort-by" onchange="sortingFunction(this.value);">
+								<option value="0">Sort By</option>
+								<option value="name">Name</option>
+								<option value="date">Date</option>
+							</select>
+						</div>
+						<div class="col-lg-9">
+							<form action="/event" method="GET">
+								<div class="search" style="float: left; margin-right: 15px;">
+									<input type="text" name="search_by" id="search_by" placeholder="Search">
+								</div>
+								<div class="search" style="float: left; margin-right: 15px;">
+									<input type="submit" name="">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					{{#result}}
+						<div class="col-lg-4 wow bounceInLeft" data-wow-delay="0.5s">
+							<div class="property-div">
+								<div class="property-div-img">
+									<img src="/theme/media/event/{{img}}">
+								</div>
+								<div class="property-div-content">
+									<div class="property-div-heading">
+										{{formatDate event_date}}
+									</div>
+									<div class="property-div-txt">
+										{{event_name}}
+									<div class="property-div-price">
+										<i class="fa fa-map-marker"></i>	
+									</div>	
+									<div class="location">
+										{{location}}
+									</div>		
+									</div>
+									<div class="row">
+										<div class="view-detail-events">
+											View Detail
+										</div>	
+									</div>
+								</div>
+							</div>
+						</div>
+					{{/result}}
+					{{message}}
+				</div>
+				<div class="center-pagination">
+					{{{paginator paginator leftText="Prev" rightText="Next"}}}
+				</div>
+
+			</div>
+		</div>
+		
+{{> themeFooter }}

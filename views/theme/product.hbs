@@ -1,0 +1,112 @@
+{{> themeHeader}}
+	<div id="header" style="background-image: url('/assets/img/shopping.png');">
+		<div class="main-content">	
+			<div class="page-heading">
+				<div class="page-heading-txt">
+					Yalla<span>Shopping</span>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<div class="main-content" id="main-content">
+		<div class="col-lg-12">
+			<div class="col-lg-3 clearfix">
+				<div class="main-filter wow bounceInDown">
+					<div class="main-filter-heading">
+						browse
+					</div>
+					<a href="/product?category=Athletic Bag#main-content"><div class="filter-txt">. athletic bags <span>(9)</span></div></a>
+					<a href="/product?category=Bag#main-content"><div class="filter-txt">. bags <span>(9)</span></div></a>
+					<a href="/product?category=Briefcase#main-content"><div class="filter-txt">. briefcases <span>(9)</span></div></a>
+					<a href="/product?category=Mens Wallet#main-content"><div class="filter-txt">. mens wallet <span>(9)</span></div></a>
+					<a href="/product?category=Women Handbag#main-content"><div class="filter-txt">. women handbags <span>(9)</span></div></a>
+					<a href="/product?category=Women Wallet#main-content"><div class="filter-txt">. women wallets <span>(9)</span></div></a>
+				</div>
+			</div>
+			<div class="col-lg-9">
+
+				<div class="col-lg-12 clearfix">
+					<div class="secondary-filter clearfix">
+						<div class="col-lg-3">
+							<select class="sort-by">
+								<option>Sort By</option>
+								<option>Name</option>
+								<option>Date</option>
+							</select>
+						</div>
+						<div class="col-lg-9">
+							<div class="search">
+								<input type="text" name="search-by" id="search-by" placeholder="Search">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class="col-lg-12 wow bounceInLeft" data-wow-delay="0.5s">
+						{{#result}}
+							<div class="shopping-div">
+								<div class="col-lg-3">
+									<div class="shopping-div">
+										<img src="/theme/media/product/{{img}}">
+									</div>
+								</div>
+								<div class="col-lg-9">
+									<div class="shopping-div-content">
+										<div class="row">
+											<div class="col-lg-9">
+												<div class="shopping-div-heading">
+													{{name}}
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<div class="shopping-div-price">
+													{{price}}.00 AED
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="shopping-div-details">
+													<div class="col-lg-3">
+														<div class="shopping-div-info">
+															<i class="fa fa-certificate"></i> Age: {{age}} Years
+														</div>
+													</div>
+													<div class="col-lg-3">
+														<div class="shopping-div-info">
+															<i class="fa fa-file-text-o"></i> Condition: {{condition}}
+														</div>
+													</div>
+													<div class="col-lg-3">
+														<div class="shopping-div-info">
+															<i class="fa fa-file-text-o"></i> Category: {{category}}
+														</div>
+													</div>
+													<div class="col-lg-3">
+														<div class="shopping-cart">
+															<i class="fa fa-shopping-cart"></i> Add to Cart
+														</div>
+													</div>
+													<div class="col-lg-4">
+														<div class="shopping-div-info">
+															<i class="fa fa-map-marker"></i> Located: {{location}}
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						{{/result}}
+						{{message}}
+					</div>
+				</div>
+				<div class="center-pagination">
+					{{{paginator paginator leftText="Prev" rightText="Next"}}}
+				</div>
+
+			</div>
+		</div>
+{{> themeFooter}}

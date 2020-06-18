@@ -1,0 +1,99 @@
+{{> masterHeader }}
+{{> menu }}
+	<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+		<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+			<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+				<div class="row">
+					<div class="col-md-8 auto-margin">
+						<div class="kt-portlet">
+							<div class="kt-portlet__head">
+								<div class="kt-portlet__head-label">
+									<h3 class="kt-portlet__head-title">
+										Product Details
+									</h3>
+								</div>
+							</div>
+							<!--begin::Form-->
+							<form class="kt-form kt-form--label-right" action="/product/save" method="POST" enctype="multipart/form-data">
+
+								<div class="kt-portlet__body">
+									<div class="form-group row">
+
+										<div class="col-lg-3">
+											<img src="/theme/media/logos/logo.png" id="showImg" class="img-div">
+											<input type="file" name="img" id="img" required="" class="getPicture">
+										</div>
+										<div class="col-lg-9">
+											<div class="col-lg-12">
+												<div class="row">
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Name</label>
+														<input class="form-control" type="text" value="" name="name" id="name" required="">
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Price</label>
+														<input class="form-control" type="number" value="" name="price" id="price" required="" min="0">
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Location</label>
+														<input class="form-control" type="text" value="" name="location" id="location" required="" min="0">
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Category</label>
+														<select class="form-control" name="category" id="category">
+															<option value="Athletic Bag" {{isSelected result.category "Athletic Bag"}}>Athletic Bag</option>
+															<option value="Bag" {{isSelected result.category "Bag"}}>Bag</option>
+															<option value="Briefcase" {{isSelected result.category "Briefcase"}}>Briefcase</option>
+															<option value="Mens Wallet" {{isSelected result.category "Mens Wallet"}}>Mens Wallet</option>
+															<option value="Women Handbag" {{isSelected result.category "Women Handbag"}}>Women Handbag</option>
+															<option value="Women Wallet" {{isSelected result.category "Women Wallet"}}>Women Wallet</option>
+														</select>
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">For Age</label>
+														<select class="form-control" name="age" id="age">
+															<option value="5-10">5-10</option>
+															<option value="10-15">10-15</option>
+															<option value="15-25">15-25</option>
+															<option value="25-35">25-35</option>
+															<option value="35">Above 35</option>
+														</select>
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Condition</label>
+														<select class="form-control" name="condition" id="condition">
+															<option value="good">Good</option>
+															<option value="poor">Poor</option>
+															<option value="satisfactory">Satisfactory</option>
+														</select>
+													</div>
+													<div class="col-md-12">
+														<label for="example-text-input" class="col-form-label">Description</label>
+														<textarea rows="5" name="description" id="description" class="form-control"></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+
+								</div>
+								<div class="kt-portlet__foot">
+									<div class="kt-form__actions">
+										<div class="row">
+											<div class="col-8">
+											</div>
+											<div class="col-lg-4 kt-align-right">
+												<button type="submit" class="btn btn-success">Submit</button>
+												<button type="reset" class="btn btn-secondary">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+{{> footer }}

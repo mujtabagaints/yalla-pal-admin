@@ -9,6 +9,10 @@ var KTInputmask = function () {
             "placeholder": "mm/dd/yyyy",
             autoUnmask: true
         });
+        $(".date").inputmask("99/99/9999", {
+            "placeholder": "mm/dd/yyyy",
+            autoUnmask: true
+        });
 
         // custom placeholder        
         $("#kt_inputmask_2").inputmask("99/99/9999", {

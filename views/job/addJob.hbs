@@ -2,36 +2,6 @@
 {{> menu }}
 	<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
 		<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
-								
-			<!-- begin:: Subheader -->
-			<div class="kt-subheader   kt-grid__item" id="kt_subheader">
-			    <!-- <div class="kt-container ">
-			        <div class="kt-subheader__main">
-			            <h3 class="kt-subheader__title">
-			                {{ $module }}                           
-			            </h3>
-						<span class="kt-subheader__separator kt-hidden"></span>
-			            <div class="kt-subheader__breadcrumbs">
-			                <a href="#" class="kt-subheader__breadcrumbs-home">
-			                	<i class="flaticon2-shelter"></i>
-			                </a>
-			                   <span class="kt-subheader__breadcrumbs-separator"></span>
-			                <a href="" class="kt-subheader__breadcrumbs-link">
-			                    {{ $menu }}                        
-			                </a>
-			                <span class="kt-subheader__breadcrumbs-separator"></span>
-			                <a href="" class="kt-subheader__breadcrumbs-link">
-			                	{{ $module }}                       
-			                </a>
-			                <span class="kt-subheader__breadcrumbs-separator"></span>
-			                <a href="" class="kt-subheader__breadcrumbs-link">
-			                    {{ $page }}                     
-			                </a>
-			            </div>
-			        </div>
-			    </div> -->
-			</div>
-			<!-- end:: Subheader -->
 
 			<div class="kt-container  kt-grid__item kt-grid__item--fluid">
 				<div class="row">
@@ -45,46 +15,92 @@
 								</div>
 							</div>
 							<!--begin::Form-->
-							<form class="kt-form kt-form--label-right" action="/saveJob" method="POST">
+							<form class="kt-form kt-form--label-right" action="/job/save" method="POST" enctype="multipart/form-data">
 
 								<div class="kt-portlet__body">
 									<div class="form-group row">
 
 										<div class="col-lg-3">
-											<img src="theme/media/logos/logo.png" style="width: 75%;margin-bottom: 20px;">
-											<input type="file" name="img" id="img" required="">
+											<img src="/theme/media/logos/logo.png" id="showImg" class="img-div">
+											<input type="file" name="img" id="img" required="" class="getPicture">
 										</div>
 										<div class="col-lg-9">
 											<div class="col-lg-12">
 												<div class="row">
-													<div class="col-lg-3">
+													<div class="col-lg-4">
 														<label for="example-text-input" class="col-form-label">Company Name</label>
-														<input class="form-control" type="text" value="" name="name" id="example-text-input" required="">
+														<input class="form-control" type="text" value="" name="company_name" id="company_name" required="">
 													</div>
-													<div class="col-lg-3">
+													<div class="col-lg-4">
 														<label for="example-text-input" class="col-form-label">Job Title</label>
-														<input class="form-control" type="text" value="" name="title" id="example-text-input" required="">
+														<input class="form-control" type="text" value="" name="title" id="title" required="">
 													</div>
-													<div class="col-lg-3">
+													<div class="col-lg-4">
 														<label for="example-text-input" class="col-form-label">Country</label>
-														<input class="form-control" type="number" value="" name="name" id="example-text-input" required="" min="0">
+														<input class="form-control" type="number" value="" name="country" id="country" required="" min="0">
 													</div>
-													<div class="col-lg-3">
+													<div class="col-lg-4">
 														<label for="example-text-input" class="col-form-label">City</label>
-														<input class="form-control" type="number" value="" name="name" id="example-text-input" required="" min="0">
+														<input class="form-control" type="number" value="" name="city" id="city" required="" min="0">
 													</div>
-													<div class="col-lg-3">
-														<label for="example-text-input" class="col-form-label">Industry</label>
-														<select class="form-control" name="industry">
-															<option value="healthcare">Healthcare</option>
-															<option value="oil&gas">Oil & Gas</option>
-															<option value="telecom">Telecom</option>
-															<option value="education">Education</option>
-															<option value="civil-engieering">Civil Engieering</option>
-															<option value="hospital">Hospital</option>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Category</label>
+														<select class="form-control" name="job_industry" id="job_industry">
+															{{#result}}
+																<option value="{{id}}">{{name}}</option>
+															{{/result}}
 														</select>
 													</div>
-													<div class="col-md-9">
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Career Level</label>
+														<select class="form-control" name="career_level" id="career_level">
+															<option value="Junior">Junior</option>
+															<option value="Senior">Senior</option>
+															<option value="Executive">Executive</option>
+															<option value="Management">Management</option>
+															<option value="Senior Executive">Senior Executive</option>
+															<option value="Senior Manager">Senior Manager</option>
+														</select>
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Education Level</label>
+														<select class="form-control" name="education_level" id="education_level">
+															<option value="High School">High School</option>
+															<option value="Bachelors">Bachelors</option>
+															<option value="Masters">Masters</option>
+															<option value="MPhill">MPhill</option>
+															<option value="Phd">Phd</option>
+														</select>
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Experience</label>
+														<select class="form-control" name="experience" id="experience">
+															<option value="0-5">0-5</option>
+															<option value="6-10">6-10</option>
+															<option value="10-15">10-15</option>
+														</select>
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Employment Type</label>
+														<select class="form-control" name="employment_type" id="employment_type">
+															<option value="Full Time">Full Time</option>
+															<option value="Part Time">Part Time</option>
+															<option value="Contract">Contract</option>
+														</select>
+													</div>
+
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Salary Range</label>
+														<select class="form-control" name="salary_range" id="salary_range">
+															<option value="0-1999">0-1999</option>
+															<option value="2000-3999">2000-3999</option>
+															<option value="4000-5999">4000-5999</option>
+															<option value="6000-7999">6000-7999</option>
+															<option value="8000-9999">8000-9999</option>
+															<option value="9000-10000">9000-10000</option>
+														</select>
+													</div>
+													<div class="col-lg-8">
 														<label for="example-text-input" class="col-form-label">Description</label>
 														<textarea rows="5" name="description" id="description" class="form-control"></textarea>
 													</div>

@@ -3,16 +3,18 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 var dateformat = require('dateformat');
 
-exports.get = async(req,res) => {
+exports.get = (req,res) => {
 	
 	try{
 
-		db.query("SELECT * FROM property", async(error,results) => {
+		db.query("SELECT * FROM property", (error,results) => {
 			
 			if(results){
 				var result = JSON.parse(JSON.stringify(results));
 				res.render('./property/allProperty',{
-					result: result
+					result: result,
+					success: req.flash("success"),
+							error: req.flash("error"),
 				});
 			}
 			
@@ -25,7 +27,8 @@ exports.get = async(req,res) => {
 exports.add = async(req,res) => {
 	
 	res.render("./property/addProperty",{ 
-									success: req.flash("success")
+									success: req.flash("success"),
+									error: req.flash("error"),
 								});
 	
 }
@@ -38,12 +41,12 @@ exports.save = (req,res) => {
 		//check if one of them is null or not ... if null throw error
 		if( !name || !price || !area || !beds || !bath || !description ){
 			req.flash("error","Please provide All Property details.");
-			res.redirect('/addProperty');
+			res.redirect('/property/add');
 		}
 		//check if request body has file ... if not throw an error
 		if (!req.files){
 			req.flash("error","No Image was provided!");
-			res.redirect('/addProperty');
+			res.redirect('/property/add');
 		}
 		//console.log(req.files.img);
 		var file = req.files.img;
@@ -55,13 +58,13 @@ exports.save = (req,res) => {
                              
 	            if (err){
 	                req.flash("error","Sorry! File wasnot uploaded. Error Occured.");
-					res.redirect('/addProperty');
+					res.redirect('/property/add');
 				}else{
       					db.query("SELECT * FROM property WHERE name = ? && price = ? && area = ?", [name,price,area], async(error,results) => {
 						//console.log(results);
 						if( !results ) {
 							req.flash("error","Details are already Entered!");
-							res.redirect('/addProperty');
+							res.redirect('/property/add');
 						}
 						else{
 							console.log(results);
@@ -85,7 +88,7 @@ exports.save = (req,res) => {
 										console.log(error);
 									}else{
 										req.flash("success","Data Inserted Successfully!");
-										res.redirect('/allProperty');
+										res.redirect('/property/all');
 									}
 								});
 							
@@ -95,7 +98,7 @@ exports.save = (req,res) => {
 			});
         } else {
             req.flash("error","error");
-			res.redirect('/addProperty');
+			res.redirect('/property/add');
         }
 		
 	}catch(error){
@@ -112,11 +115,13 @@ exports.edit = async(req,res) => {
 				//var result = JSON.parse(JSON.stringify(result));
 				//console.log(result[0].id);
 				res.render('./property/editProperty',{
-					result: result[0]
+					result: result[0],
+					success: req.flash("success"),
+					error: req.flash("error"),
 				});
 			}else{
 				req.flash("error","error");
-				res.redirect('/editProperty/'+req.params.id);
+				res.redirect('/property/edit/'+req.params.id);
 			}
 			
 		})
@@ -148,11 +153,11 @@ exports.update = async(req,res) => {
 				if(results){
 
 					req.flash("success","Data Updated Successfully!");
-					res.redirect('/editProperty/' + req.body.id);
+					res.redirect('/property/edit/' + req.body.id);
 				}else{
 
 					req.flash("error","Error occurs on Data Updates!");
-					res.redirect('/editProperty/' + req.body.id);
+					res.redirect('/property/edit/' + req.body.id);
 				}
 			});
 			
@@ -167,7 +172,7 @@ exports.update = async(req,res) => {
 	                             
 		            if (err){
 		                req.flash("error","Sorry! File wasnot uploaded. Error Occured.");
-						res.redirect('/addProperty');
+						res.redirect('/property/edit/'+ req.body.id);
 					}else{
 						const propertyDataForUpdate = {
 										"name": req.body.name, 
@@ -185,18 +190,18 @@ exports.update = async(req,res) => {
 							if(results){
 
 								req.flash("success","Data Updated Successfully!");
-								res.redirect('/editProperty/' + req.body.id);
+								res.redirect('/property/edit/' + req.body.id);
 							}else{
 
 								req.flash("error","Error occurs on Data Updates!");
-								res.redirect('/editProperty/' + req.body.id);
+								res.redirect('/property/edit/' + req.body.id);
 							}
 						});
 	      			}
 				});
 	        } else {
 	            req.flash("error","error");
-				res.redirect('/editProperty/' + req.body.id);
+				res.redirect('/property/edit' + req.body.id);
 	        }
 	    }
 		

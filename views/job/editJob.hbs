@@ -1,0 +1,131 @@
+{{> masterHeader }}
+{{> menu }}
+	<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+		<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+			<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+				<div class="row">
+					<div class="col-md-8 auto-margin">
+						<div class="kt-portlet">
+							<div class="kt-portlet__head">
+								<div class="kt-portlet__head-label">
+									<h3 class="kt-portlet__head-title">
+										Property Details
+									</h3>
+								</div>
+							</div>
+							<!--begin::Form-->
+							<form class="kt-form kt-form--label-right" action="/job/update" method="POST" enctype="multipart/form-data">
+
+								<div class="kt-portlet__body">
+									<div class="form-group row">
+
+										<div class="col-lg-3">
+											<img src="/theme/media/job/{{result.img}}" id="showImg" class="img-div">
+											<input type="file" name="img" id="img" class="getPicture">
+											<input type="hidden" name="id" id="id" value="{{result.id}}">
+										</div>
+										<div class="col-lg-9">
+											<div class="col-lg-12">
+												<div class="row">
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Company Name</label>
+														<input class="form-control" type="text" value="{{result.company_name}}" name="company_name" id="company_name" required="">
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Job Title</label>
+														<input class="form-control" type="text" value="{{result.title}}" name="title" id="title" required="">
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Country</label>
+														<input class="form-control" type="number" value="{{result.country}}" name="country" id="country" required="" min="0">
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">City</label>
+														<input class="form-control" type="number" value="{{result.city}}" name="city" id="city" required="" min="0">
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Category {{category}}</label>
+														<select class="form-control" name="job_industry" id="job_industry">
+															{{#each job_industry}}
+																<option value="{{id}}" {{isSelected ../result.job_industry id}}>{{name}}</option>
+															{{/each}}
+														</select>
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Career Level</label>
+														<select class="form-control" name="career_level" id="career_level">
+															<option value="Junior" {{isSelected result.career_level "Junior"}}>Junior</option>
+															<option value="Senior" {{isSelected result.career_level "Senior"}}>Senior</option>
+															<option value="Executive" {{isSelected result.career_level "Executive"}}>Executive</option>
+															<option value="Management" {{isSelected result.career_level "Management"}}>Management</option>
+															<option value="Senior Executive" {{isSelected result.career_level "Senior Executive"}}>Senior Executive</option>
+															<option value="Senior Manager" {{isSelected result.career_level "Senior Manager"}}>Senior Manager</option>
+														</select>
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Education Level</label>
+														<select class="form-control" name="education_level" id="education_level">
+															<option value="High School" {{isSelected result.education_level "High School"}}>High School</option>
+															<option value="Bachelors" {{isSelected result.education_level "Bachelors"}}>Bachelors</option>
+															<option value="Masters" {{isSelected result.education_level "Masters"}}>Masters</option>
+															<option value="MPhill" {{isSelected result.education_level "MPhill"}}>MPhill</option>
+															<option value="Phd" {{isSelected result.education_level "Phd"}}>Phd</option>
+														</select>
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Experience</label>
+														<select class="form-control" name="experience" id="experience">
+															<option value="0-5" {{isSelected result.experience "0-5"}}>0-5</option>
+															<option value="6-10" {{isSelected result.experience "6-10"}}>6-10</option>
+															<option value="10-15" {{isSelected result.experience "10-15"}}>10-15</option>
+														</select>
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Employment Type</label>
+														<select class="form-control" name="employment_type" id="employment_type">
+															<option value="Full Time" {{isSelected result.employment_type "Full Time"}}>Full Time</option>
+															<option value="Part Time" {{isSelected result.employment_type "Part Time"}}>Part Time</option>
+															<option value="Contract" {{isSelected result.employment_type "Contract"}}>Contract</option>
+														</select>
+													</div>
+													<div class="col-lg-4">
+														<label for="example-text-input" class="col-form-label">Salary Range</label>
+														<select class="form-control" name="salary_range" id="salary_range">
+															<option value="0-1999" {{isSelected result.salary_range "0-1999"}}>0-1999</option>
+															<option value="2000-3999" {{isSelected result.salary_range "2000-3999"}}>2000-3999</option>
+															<option value="4000-5999" {{isSelected result.salary_range "4000-5999"}}>4000-5999</option>
+															<option value="6000-7999" {{isSelected result.salary_range "6000-7999"}}>6000-7999</option>
+															<option value="8000-9999" {{isSelected result.salary_range "8000-9999"}}>8000-9999</option>
+															<option value="9000-10000" {{isSelected result.salary_range "9000-10000"}}>9000-10000</option>
+														</select>
+													</div>
+													<div class="col-lg-8">
+														<label for="example-text-input" class="col-form-label">Description</label>
+														<textarea rows="5" name="description" id="description" class="form-control">{{result.description}}</textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+
+								</div>
+								<div class="kt-portlet__foot">
+									<div class="kt-form__actions">
+										<div class="row">
+											<div class="col-8">
+											</div>
+											<div class="col-lg-4 kt-align-right">
+												<button type="submit" class="btn btn-success">Submit</button>
+												<button type="reset" class="btn btn-secondary">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+{{> footer }}
