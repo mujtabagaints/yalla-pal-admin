@@ -239,3 +239,380 @@ exports.update = (req,res) => {
 	}
 
 }
+exports.show = (req,res) => {
+
+	const match = {}
+	//console.log(req.query.tag);
+	if(req.query.category){
+        
+        console.log(req.query.category);
+        try{
+
+        	let currentPage = parseInt(req.query.page) || 1;
+			//console.log(currentPage);
+			let paginator = {};
+			paginator.limit = 9;
+
+			db.query("SELECT count(id) as total FROM job WHERE job_industry = ?",[req.query.category], (error,results) => {
+				//console.log(results[0].total);
+				res.locals.currentPage = currentPage;
+				res.locals.totalPages = Math.ceil(parseInt(results[0].total) / paginator.limit);
+				res.locals.totalRows  = parseInt(results[0].total);
+
+				// Make the same variable accessible in the pagination object.
+				paginator.totalPages  = res.locals.totalPages;
+				paginator.currentPage = currentPage;
+
+				if (res.locals.currentPage > res.locals.totalPages)
+        			return res.redirect('/job#main-content');
+
+				let limit = paginator.limit;
+	    		let offset = res.locals.totalRows - (paginator.limit * res.locals.currentPage);
+	    		if (offset < 0) {
+			        limit += offset; // Algebraic double negative
+			        offset = 0;
+			    }
+	    		/*console.log(res.locals.totalRows);
+	    		console.log(offset);*/
+				db.query("SELECT * FROM job WHERE job_industry = ? LIMIT ? OFFSET ?", [req.query.category,limit,offset], (error,results) => {
+	    			
+	    			db.query("SELECT * FROM job_industry", [limit,offset], (error,category) => {
+						if(error){
+							console.log(error);
+						}
+						if(results){
+							var result = JSON.parse(JSON.stringify(results));
+							//res.send(result);
+							//console.log(req.query.page);
+							res.render('./theme/job',{
+								result: result,
+								category:category,
+								paginator: { page: res.locals.currentPage, limit: limit, totalRows: res.locals.totalRows }
+							});
+						}
+					});
+					
+				});
+			});
+		}catch(error){
+			console.log(error);
+		}
+    }else if(req.query.job_title && req.query.job_city && req.query.experience){
+        //match.search_by = req.query.search_by === 'true';
+        //console.log(req.query.tag);
+        try{
+
+			let currentPage = parseInt(req.query.page) || 1;
+			//console.log(currentPage);
+			let paginator = {};
+			paginator.limit = 9;
+
+			db.query("SELECT count(id) as total FROM job WHERE title = ? OR experience = ?",[req.query.job_title,req.query.experience], (error,results) => {
+				//console.log(results[0].total);
+				res.locals.currentPage = currentPage;
+				res.locals.totalPages = Math.ceil(parseInt(results[0].total) / paginator.limit);
+				res.locals.totalRows  = parseInt(results[0].total);
+
+				// Make the same variable accessible in the pagination object.
+				paginator.totalPages  = res.locals.totalPages;
+				paginator.currentPage = currentPage;
+
+				if (res.locals.currentPage > res.locals.totalPages)
+        			return res.redirect('/job#main-content');
+
+				let limit = paginator.limit;
+	    		let offset = res.locals.totalRows - (paginator.limit * res.locals.currentPage);
+	    		if (offset < 0) {
+			        limit += offset; // Algebraic double negative
+			        offset = 0;
+			    }
+	    		/*console.log(res.locals.totalRows);
+	    		console.log(offset);*/
+				db.query("SELECT * FROM job WHERE title = ? OR experience = ? LIMIT ? OFFSET ?", [req.query.job_title,req.query.experience,limit,offset], (error,results) => {
+	    			db.query("SELECT * FROM job_industry", [limit,offset], (error,category) => {
+						if(error){
+							console.log(error);
+						}
+						if(results){
+							var result = JSON.parse(JSON.stringify(results));
+							//res.send(result);
+							//console.log(req.query.page);
+							res.render('./theme/job',{
+								result: result,
+								category: category,
+								paginator: { page: res.locals.currentPage, limit: limit, totalRows: res.locals.totalRows }
+							});
+						}
+					});
+				})
+			});
+		}catch(error){
+			console.log(error);
+		}
+    }else if(req.query.level){
+        //match.level = req.query.level === 'true';
+        //console.log(req.query.level);
+        try{
+
+			let currentPage = parseInt(req.query.page) || 1;
+			//console.log(currentPage);
+			let paginator = {};
+			paginator.limit = 9;
+
+			db.query("SELECT count(id) as total FROM job WHERE career_level = ?",[req.query.level], (error,results) => {
+				//console.log(results[0].total);
+				res.locals.currentPage = currentPage;
+				res.locals.totalPages = Math.ceil(parseInt(results[0].total) / paginator.limit);
+				res.locals.totalRows  = parseInt(results[0].total);
+
+				// Make the same variable accessible in the pagination object.
+				paginator.totalPages  = res.locals.totalPages;
+				paginator.currentPage = currentPage;
+
+				if (res.locals.currentPage > res.locals.totalPages)
+        			return res.redirect('/job#main-content');
+
+				let limit = paginator.limit;
+	    		let offset = res.locals.totalRows - (paginator.limit * res.locals.currentPage);
+	    		if (offset < 0) {
+			        limit += offset; // Algebraic double negative
+			        offset = 0;
+			    }
+	    		/*console.log(res.locals.totalRows);
+	    		console.log(offset);*/
+				db.query("SELECT * FROM job WHERE career_level = ? LIMIT ? OFFSET ?", [req.query.level,limit,offset], (error,results) => {
+	    			db.query("SELECT * FROM job_industry", [limit,offset], (error,category) => {
+						if(error){
+							console.log(error);
+						}
+						if(results){
+							var result = JSON.parse(JSON.stringify(results));
+							//res.send(result);
+							//console.log(req.query.page);
+							res.render('./theme/job',{
+								result: result,
+								category: category,
+								paginator: { page: res.locals.currentPage, limit: limit, totalRows: res.locals.totalRows }
+							});
+						}
+					});
+				})
+			});
+		}catch(error){
+			console.log(error);
+		}
+    }else if(req.query.experience){
+        //match.experience = req.query.experience === 'true';
+        console.log(req.query.experience);
+        try{
+
+			let currentPage = parseInt(req.query.page) || 1;
+			//console.log(currentPage);
+			let paginator = {};
+			paginator.limit = 9;
+
+			db.query("SELECT count(id) as total FROM job WHERE experience = ?",[req.query.experience], (error,results) => {
+				//console.log(results[0].total);
+				res.locals.currentPage = currentPage;
+				res.locals.totalPages = Math.ceil(parseInt(results[0].total) / paginator.limit);
+				res.locals.totalRows  = parseInt(results[0].total);
+
+				// Make the same variable accessible in the pagination object.
+				paginator.totalPages  = res.locals.totalPages;
+				paginator.currentPage = currentPage;
+
+				if (res.locals.currentPage > res.locals.totalPages)
+        			return res.redirect('/job#main-content');
+
+				let limit = paginator.limit;
+	    		let offset = res.locals.totalRows - (paginator.limit * res.locals.currentPage);
+	    		if (offset < 0) {
+			        limit += offset; // Algebraic double negative
+			        offset = 0;
+			    }
+	    		/*console.log(res.locals.totalRows);
+	    		console.log(offset);*/
+				db.query("SELECT * FROM job WHERE experience = ? LIMIT ? OFFSET ?", [req.query.experience,limit,offset], (error,results) => {
+	    			db.query("SELECT * FROM job_industry", [limit,offset], (error,category) => {
+						if(error){
+							console.log(error);
+						}
+						if(results){
+							var result = JSON.parse(JSON.stringify(results));
+							//res.send(result);
+							//console.log(req.query.page);
+							res.render('./theme/job',{
+								result: result,
+								category: category,
+								paginator: { page: res.locals.currentPage, limit: limit, totalRows: res.locals.totalRows }
+							});
+						}
+					});
+				})
+			});
+		}catch(error){
+			console.log(error);
+		}
+    }else if(req.query.sort_by){
+    	if(req.query.sort_by === 'name'){
+    		
+    		try{
+
+				let currentPage = parseInt(req.query.page) || 1;
+				//console.log(currentPage);
+				let paginator = {};
+				paginator.limit = 9;
+
+				db.query("SELECT count(id) as total FROM job ORDER BY name asc", (error,results) => {
+					//console.log(results[0].total);
+					res.locals.currentPage = currentPage;
+					res.locals.totalPages = Math.ceil(parseInt(results[0].total) / paginator.limit);
+					res.locals.totalRows  = parseInt(results[0].total);
+
+					// Make the same variable accessible in the pagination object.
+					paginator.totalPages  = res.locals.totalPages;
+					paginator.currentPage = currentPage;
+
+					if (res.locals.currentPage > res.locals.totalPages)
+	        			return res.redirect('/job#main-content');
+
+					let limit = paginator.limit;
+		    		let offset = res.locals.totalRows - (paginator.limit * res.locals.currentPage);
+		    		if (offset < 0) {
+				        limit += offset; // Algebraic double negative
+				        offset = 0;
+				    }
+		    		/*console.log(res.locals.totalRows);
+		    		console.log(offset);*/
+					db.query("SELECT * FROM job ORDER BY `name` asc LIMIT ? OFFSET ?", [limit,offset], (error,results) => {
+		    			db.query("SELECT * FROM job_industry", [limit,offset], (error,category) => {
+						if(error){
+							console.log(error);
+						}
+						if(results){
+							var result = JSON.parse(JSON.stringify(results));
+							//res.send(result);
+							//console.log(req.query.page);
+							res.render('./theme/job',{
+								result: result,
+								category: category,
+								paginator: { page: res.locals.currentPage, limit: limit, totalRows: res.locals.totalRows }
+							});
+						}
+						});
+					});
+				});
+			}catch(error){
+				console.log(error);
+			}
+
+    	}else{
+    		
+    		try{
+
+    			let currentPage = parseInt(req.query.page) || 1;
+				//console.log(currentPage);
+				let paginator = {};
+				paginator.limit = 9;
+
+				db.query("SELECT count(id) as total FROM job ORDER BY created_at desc", (error,results) => {
+					//console.log(results[0].total);
+					res.locals.currentPage = currentPage;
+					res.locals.totalPages = Math.ceil(parseInt(results[0].total) / paginator.limit);
+					res.locals.totalRows  = parseInt(results[0].total);
+
+					// Make the same variable accessible in the pagination object.
+					paginator.totalPages  = res.locals.totalPages;
+					paginator.currentPage = currentPage;
+
+					if (res.locals.currentPage > res.locals.totalPages)
+	        			return res.redirect('/job#main-content');
+
+					let limit = paginator.limit;
+		    		let offset = res.locals.totalRows - (paginator.limit * res.locals.currentPage);
+		    		if (offset < 0) {
+				        limit += offset; // Algebraic double negative
+				        offset = 0;
+				    }
+		    		/*console.log(res.locals.totalRows);
+		    		console.log(offset);*/
+					db.query("SELECT * FROM job ORDER BY `created_at` desc LIMIT ? OFFSET ?", [limit,offset], (error,results) => {
+		    			db.query("SELECT * FROM job_industry", [limit,offset], (error,category) => {
+							if(error){
+								console.log(error);
+							}
+							if(results){
+								var result = JSON.parse(JSON.stringify(results));
+								//res.send(result);
+								//console.log(req.query.page);
+								res.render('./theme/job',{
+									result: result,
+									category: category,
+									paginator: { page: res.locals.currentPage, limit: limit, totalRows: res.locals.totalRows }
+								});
+							}
+						});
+					});
+				});
+				
+			}catch(error){
+				console.log(error);
+			}
+
+    	}
+        
+    }else{
+		try{
+
+			let currentPage = parseInt(req.query.page) || 1;
+			//console.log(currentPage);
+			let paginator = {};
+			paginator.limit = 9;
+
+			db.query("SELECT count(id) as total FROM job", (error,results) => {
+				//console.log(results[0].total);
+				res.locals.currentPage = currentPage;
+				res.locals.totalPages = Math.ceil(parseInt(results[0].total) / paginator.limit);
+				res.locals.totalRows  = parseInt(results[0].total);
+
+				// Make the same variable accessible in the pagination object.
+				paginator.totalPages  = res.locals.totalPages;
+				paginator.currentPage = currentPage;
+
+				if (res.locals.currentPage > res.locals.totalPages)
+        			return res.redirect('/job');
+
+				let limit = paginator.limit;
+	    		let offset = res.locals.totalRows - (paginator.limit * res.locals.currentPage);
+	    		if (offset < 0) {
+			        limit += offset; // Algebraic double negative
+			        offset = 0;
+			    }
+	    		/*console.log(res.locals.totalRows);
+	    		console.log(offset);*/
+				db.query("SELECT * FROM job LIMIT ? OFFSET ?", [limit,offset], (error,results) => {
+	    			db.query("SELECT * FROM job_industry", [limit,offset], (error,category) => {
+
+	    				//console.log(category);
+						if(error){
+							console.log(error);
+						}
+						if(results){
+							var result = JSON.parse(JSON.stringify(results));
+							//res.send(result);
+							//console.log(req.query.page);
+							res.render('./theme/job',{
+								result: result,
+								category:category,
+								paginator: { page: res.locals.currentPage, limit: limit, totalRows: res.locals.totalRows }
+							});
+						}
+
+					});
+				});
+			});
+		}catch(error){
+			console.log(error);
+		}
+	}
+}

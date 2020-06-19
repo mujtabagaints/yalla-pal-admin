@@ -99,6 +99,12 @@
 	//
 	var sortBy = '';
 	function sortingFunction(sortBy) {
-		window.location = "/theme/event?sort_by=" + sortBy;
+		window.location = "/event?sort_by=" + sortBy +"#main-content";
+	}
+	function sortingFunctionProduct(sortBy) {
+		window.location = "/product?sort_by=" + sortBy +"#main-content";
+	}
+	function sortingFunctionProperty(sortBy) {
+		window.location = "/property?sort_by=" + sortBy +"#main-content";
 	}
 </script>

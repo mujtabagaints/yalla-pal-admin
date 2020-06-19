@@ -1,0 +1,131 @@
+{{> themeHeader}}
+	<div id="header" style="background-image: url('/assets/img/ad.png');">
+		<div class="main-content">	
+			<div class="page-heading">
+				<div class="page-heading-txt">
+					Yalla<span>Jobs</span>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<div class="main-content" id="main-content">
+		<div class="col-lg-12">
+			<div class="col-lg-3 clearfix">
+				<div class="main-filter wow bounceInDown">
+					<div class="main-filter-heading">
+						industry
+					</div>
+					{{#category}}
+						<a href="/job?category={{id}}#main-content"><div class="filter-txt">. {{name}} </div></a>
+					{{/category}}
+				</div>
+				<div class="sub-filter wow bounceInDown">
+					<div class="sub-filter-heading">
+						career level
+					</div>
+					<a href="/job?level=Junior#main-content"><div class="sub-filter-txt">. Junior </div></a>
+					<a href="/job?level=Senior#main-content""><div class="sub-filter-txt">. Senior </div></a>
+					<a href="/job?level=Executive#main-content""><div class="sub-filter-txt">. Executive </div></a>
+					<a href="/job?level=Management#main-content""><div class="sub-filter-txt">. Management </div></a>
+					<a href="/job?level=Senior Executive#main-content""><div class="sub-filter-txt">. Senior Executive </div></a>
+					<a href="/job?level=Senior Manager#main-content""><div class="sub-filter-txt">. Senior Manager </div></a>
+				</div>
+				<div class="sub-filter wow bounceInDown">
+					<div class="sub-filter-heading">
+						experience
+					</div>
+					<a href="/job?experience=0-5#main-content"><div class="sub-filter-txt">. 0-5 years</div></a>
+					<a href="/job?experience=6-10#main-content"><div class="sub-filter-txt">. 6-10 years</div></a>
+					<a href="/job?experience=10-15#main-content"><div class="sub-filter-txt">. 10-15 years</div></a>
+				</div>
+			</div>
+			<div class="col-lg-9">
+				
+				<div class="col-lg-12 clearfix">
+					<div class="search-filter clearfix">
+						<form action="/job" method="GET">
+							<div class="col-lg-3">
+								<input type="text" name="job_title" id="job_title" class="search-keywords" placeholder="Job Title">
+							</div>
+							<div class="col-lg-3">
+								<input type="text" name="job_city" id="job_city" class="search-keywords" placeholder="City">
+							</div>
+							<div class="col-lg-3">
+								<select class="search-keywords" id="experience" name="experience">
+									<option value="">Years Experience</option>
+									<option value="0-5">0-5 Years</option>
+									<option value="6-10">6-10 Years</option>
+									<option value="10-15">10-15 Years</option>
+								</select>
+							</div>
+							<div class="col-lg-3">
+								<input type="submit" name="search-filter-button" id="search-filter-button" value="Search" class="search-keywords search-btn">
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<div class="col-lg-12">
+					{{#result}}
+						<div class="col-lg-12 wow bounceInLeft" data-wow-delay="0.5s">
+							<div class="company-div">
+								<div class="col-lg-3">
+									<div class="company-logo">
+										<img src="/theme/media/job/{{img}}">
+									</div>
+								</div>
+								<div class="col-lg-9">
+									<div class="shopping-div-content">
+										<div class="row">
+											<div class="col-lg-9">
+												<div class="company-div-heading">
+													{{title}}
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<div class="company-ad-div">
+													sponsored
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="job-location">
+													<i class="fa fa-map-marker"></i> {{location}}
+												</div>
+												<p class="job-description">
+													{{description}}
+												</p>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-12 clearfix">
+									<div class="company-div-details">
+										<div class="col-lg-3">
+											<div class="company-div-info">
+												<i class="fa fa-certificate"></i> 7 days ago
+											</div>
+										</div>
+										<div class="col-lg-9">
+											<div class="view-detail-1">
+												More Details
+											</div>
+											<div class="apply-btn">
+												Apply Now
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					{{/result}}
+				</div>
+				<div class="center-pagination">
+					{{{paginator paginator leftText="Prev" rightText="Next"}}}
+				</div>
+			</div>
+		</div>
+{{> themeFooter}}

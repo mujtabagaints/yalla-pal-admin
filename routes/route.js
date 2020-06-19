@@ -123,7 +123,9 @@ router.post("/product/update", product.update);
  */
 router.get("/event", event.show);
 router.get("/product", product.show);
-router.get("/theme/car", (req,res) => {
+router.get("/car", (req,res) => {
 	res.render("./theme/car");
 });
+router.get("/job", job.show);
+router.get("/property", property.show);
 module.exports = router;

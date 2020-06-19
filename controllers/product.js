@@ -246,10 +246,10 @@ exports.show = (req,res) => {
 			    }
 	    		/*console.log(res.locals.totalRows);
 	    		console.log(offset);*/
-				db.query("SELECT * FROM product LIMIT ? OFFSET ?", [limit,offset], (error,results) => {
-	    			console.log("total rows: "+res.locals.totalRows);
+				db.query("SELECT * FROM product WHERE category = ? LIMIT ? OFFSET ?", [req.query.category,limit,offset], (error,results) => {
+	    			/*console.log("total rows: "+res.locals.totalRows);
 	    			console.log("total pages: "+paginator.totalPages);
-	    			console.log("currnt page: "+paginator.currentPage);
+	    			console.log("currnt page: "+paginator.currentPage);*/
 					if(error){
 						console.log(error);
 					}
@@ -268,51 +268,56 @@ exports.show = (req,res) => {
 		}catch(error){
 			console.log(error);
 		}
-    }else if(req.query.month){
-        match.month = req.query.month === 'true';
-        //console.log(req.query.tag);
-        try{
-
-			db.query("SELECT e.name as event_name,et.name as tag_name,e.location as location, e.id as id,e.date as event_date,e.img as img FROM event e INNER JOIN event_tag et on e.tag = et.id WHERE MONTH(e.date) = ?",[req.query.month], (error,results) => {
-				
-				if(results != 0){
-					var result = JSON.parse(JSON.stringify(results));
-					//res.send(result);
-					//res.redirect('/theme/event/', result);
-					res.render('./theme/event',{
-						result: result
-					});
-				}else{
-					res.render('./theme/event',{
-						message: "No Data Exists on Selection Criteria."
-					});
-				}
-				
-			})
-		}catch(error){
-			console.log(error);
-		}
     }else if(req.query.search_by){
         match.search_by = req.query.search_by === 'true';
         //console.log(req.query.tag);
         try{
 
-			db.query("SELECT e.name as event_name,et.name as tag_name,e.location as location, e.id as id,e.date as event_date,e.img as img FROM event e INNER JOIN event_tag et on e.tag = et.id WHERE e.name = ?",[req.query.search_by], (error,results) => {
-				
-				if(results != 0){
-					var result = JSON.parse(JSON.stringify(results));
-					//res.send(result);
-					//res.redirect('/theme/event/', result);
-					res.render('./theme/event',{
-						result: result
-					});
-				}else{
-					res.render('./theme/event',{
-						message: "No Data Exists on Selection Criteria."
-					});
-				}
-				
-			})
+			let currentPage = parseInt(req.query.page) || 1;
+			//console.log(currentPage);
+			let paginator = {};
+			paginator.limit = 9;
+
+			db.query("SELECT count(id) as total FROM product WHERE name = ?",[req.query.search_by], (error,results) => {
+				//console.log(results[0].total);
+				res.locals.currentPage = currentPage;
+				res.locals.totalPages = Math.ceil(parseInt(results[0].total) / paginator.limit);
+				res.locals.totalRows  = parseInt(results[0].total);
+
+				// Make the same variable accessible in the pagination object.
+				paginator.totalPages  = res.locals.totalPages;
+				paginator.currentPage = currentPage;
+
+				if (res.locals.currentPage > res.locals.totalPages)
+        			return res.redirect('/product#main-content');
+
+				let limit = paginator.limit;
+	    		let offset = res.locals.totalRows - (paginator.limit * res.locals.currentPage);
+	    		if (offset < 0) {
+			        limit += offset; // Algebraic double negative
+			        offset = 0;
+			    }
+	    		/*console.log(res.locals.totalRows);
+	    		console.log(offset);*/
+				db.query("SELECT * FROM product WHERE name = ? LIMIT ? OFFSET ?", [req.query.search_by,limit,offset], (error,results) => {
+	    			// console.log("total rows: "+res.locals.totalRows);
+	    			// console.log("total pages: "+paginator.totalPages);
+	    			// console.log("currnt page: "+paginator.currentPage);
+					if(error){
+						console.log(error);
+					}
+					if(results){
+						var result = JSON.parse(JSON.stringify(results));
+						//res.send(result);
+						//console.log(req.query.page);
+						res.render('./theme/product',{
+							result: result,
+							paginator: { page: res.locals.currentPage, limit: limit, totalRows: res.locals.totalRows }
+						});
+					}
+					
+				})
+			});
 		}catch(error){
 			console.log(error);
 		}
@@ -321,25 +326,51 @@ exports.show = (req,res) => {
     		
     		try{
 
-				db.query("SELECT e.name as event_name,et.name as tag_name,e.location as location, e.id as id,e.date as event_date,e.img as img FROM event e INNER JOIN event_tag et on e.tag = et.id ORDER BY e.`name` ASC", (error,results) => {
-					
-					if(error){
-						console.log(error);
-					}
-					if(results != 0){
-						var result = JSON.parse(JSON.stringify(results));
-						//res.send(result);
-						//res.redirect('/theme/event/', result);
-						res.render('./theme/event',{
-							result: result
-						});
-					}else{
-						res.render('./theme/event',{
-							message: "No Data Exists on Selection Criteria."
-						});
-					}
-					
-				})
+				let currentPage = parseInt(req.query.page) || 1;
+				//console.log(currentPage);
+				let paginator = {};
+				paginator.limit = 9;
+
+				db.query("SELECT count(id) as total FROM product ORDER BY name asc", (error,results) => {
+					//console.log(results[0].total);
+					res.locals.currentPage = currentPage;
+					res.locals.totalPages = Math.ceil(parseInt(results[0].total) / paginator.limit);
+					res.locals.totalRows  = parseInt(results[0].total);
+
+					// Make the same variable accessible in the pagination object.
+					paginator.totalPages  = res.locals.totalPages;
+					paginator.currentPage = currentPage;
+
+					if (res.locals.currentPage > res.locals.totalPages)
+	        			return res.redirect('/product#main-content');
+
+					let limit = paginator.limit;
+		    		let offset = res.locals.totalRows - (paginator.limit * res.locals.currentPage);
+		    		if (offset < 0) {
+				        limit += offset; // Algebraic double negative
+				        offset = 0;
+				    }
+		    		/*console.log(res.locals.totalRows);
+		    		console.log(offset);*/
+					db.query("SELECT * FROM product ORDER BY `name` asc LIMIT ? OFFSET ?", [limit,offset], (error,results) => {
+		    			// console.log("total rows: "+res.locals.totalRows);
+		    			// console.log("total pages: "+paginator.totalPages);
+		    			// console.log("currnt page: "+paginator.currentPage);
+						if(error){
+							console.log(error);
+						}
+						if(results){
+							var result = JSON.parse(JSON.stringify(results));
+							//res.send(result);
+							//console.log(req.query.page);
+							res.render('./theme/product',{
+								result: result,
+								paginator: { page: res.locals.currentPage, limit: limit, totalRows: res.locals.totalRows }
+							});
+						}
+						
+					})
+				});
 			}catch(error){
 				console.log(error);
 			}
@@ -348,22 +379,50 @@ exports.show = (req,res) => {
     		
     		try{
 
-				db.query("SELECT e.name as event_name,et.name as tag_name,e.location as location, e.id as id,e.date as event_date,e.img as img FROM event e INNER JOIN event_tag et on e.tag = et.id ORDER BY e.`date` ASC", (error,results) => {
-					
-					if(results != 0){
-						var result = JSON.parse(JSON.stringify(results));
-						//res.send(result);
-						//res.redirect('/theme/event/', result);
-						res.render('./theme/event',{
-							result: result
-						});
-					}else{
-						res.render('./theme/event',{
-							message: "No Data Exists on Selection Criteria."
-						});
-					}
-					
-				})
+    			let currentPage = parseInt(req.query.page) || 1;
+				//console.log(currentPage);
+				let paginator = {};
+				paginator.limit = 9;
+
+				db.query("SELECT count(id) as total FROM product ORDER BY created_at desc", (error,results) => {
+					//console.log(results[0].total);
+					res.locals.currentPage = currentPage;
+					res.locals.totalPages = Math.ceil(parseInt(results[0].total) / paginator.limit);
+					res.locals.totalRows  = parseInt(results[0].total);
+
+					// Make the same variable accessible in the pagination object.
+					paginator.totalPages  = res.locals.totalPages;
+					paginator.currentPage = currentPage;
+
+					if (res.locals.currentPage > res.locals.totalPages)
+	        			return res.redirect('/product#main-content');
+
+					let limit = paginator.limit;
+		    		let offset = res.locals.totalRows - (paginator.limit * res.locals.currentPage);
+		    		if (offset < 0) {
+				        limit += offset; // Algebraic double negative
+				        offset = 0;
+				    }
+		    		/*console.log(res.locals.totalRows);
+		    		console.log(offset);*/
+					db.query("SELECT * FROM product ORDER BY `created_at` desc LIMIT ? OFFSET ?", [limit,offset], (error,results) => {
+		    			console.log(results);
+						if(error){
+							console.log(error);
+						}
+						if(results){
+							var result = JSON.parse(JSON.stringify(results));
+							//res.send(result);
+							//console.log(req.query.page);
+							res.render('./theme/product',{
+								result: result,
+								paginator: { page: res.locals.currentPage, limit: limit, totalRows: res.locals.totalRows }
+							});
+						}
+						
+					})
+				});
+				
 			}catch(error){
 				console.log(error);
 			}

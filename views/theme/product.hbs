@@ -29,16 +29,21 @@
 				<div class="col-lg-12 clearfix">
 					<div class="secondary-filter clearfix">
 						<div class="col-lg-3">
-							<select class="sort-by">
-								<option>Sort By</option>
-								<option>Name</option>
-								<option>Date</option>
+							<select class="sort-by" id="sort-by" onchange="sortingFunctionProduct(this.value);">
+								<option value="0">Sort By</option>
+								<option value="name">Name</option>
+								<option value="date">Date</option>
 							</select>
 						</div>
 						<div class="col-lg-9">
-							<div class="search">
-								<input type="text" name="search-by" id="search-by" placeholder="Search">
-							</div>
+							<form action="/product" method="GET">
+								<div class="search" style="float: left; margin-right: 15px;">
+									<input type="text" name="search_by" id="search_by" placeholder="Search">
+								</div>
+								<div class="search" style="float: left; margin-right: 15px;">
+									<input type="submit" name="">
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -88,7 +93,7 @@
 															<i class="fa fa-shopping-cart"></i> Add to Cart
 														</div>
 													</div>
-													<div class="col-lg-4">
+													<div class="col-lg-12">
 														<div class="shopping-div-info">
 															<i class="fa fa-map-marker"></i> Located: {{location}}
 														</div>
