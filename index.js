@@ -57,6 +57,6 @@ app.set('views', __dirname + '/views');
 app.use('/', require('./routes/route'));
 app.use('/login', require('./routes/route'));
 
-app.listen(1850, () => {
-	console.log("Server gets started on 1850 Port");
+app.listen(3300, () => {
+	console.log("Server gets started on 3300 Port");
 });
