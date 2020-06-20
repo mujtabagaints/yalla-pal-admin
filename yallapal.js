@@ -26,7 +26,7 @@ db.connect( (error) => {
 	}
 });
 //setting directory for CSS & JS Files for views
-const publicDirectory = path.join(__dirname,'/public');
+const publicDirectory = path.join(__dirname,'/yalla-pal-admin/public');
 app.use(express.static(publicDirectory));
 
 //parsing url encoded bodies
